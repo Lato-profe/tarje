@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta de Presentación Digital - Jose Alfredo Latorre</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f0f0; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .blue-gradient { background: linear-gradient(145deg, #0B0B42, #050521); box-shadow: 0 4px 6px rgba(0,0,0,0.15), inset 0 1px 1px rgba(180, 180, 255, 0.3); }
+        .button-3d { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+        .button-3d:active { transform: translateY(2px); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+        .name-color { color: #0B0B42; }
+        .icon-bg { background: linear-gradient(145deg, #0B0B42, #050521); box-shadow: 0 2px 4px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.2); }
+        .icon-color { color: #ffffff; }
+        .install-tab-active { border-bottom-width: 2px; border-color: #0B0B42; color: #0B0B42; font-weight: 600; }
+        .course-details { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out; }
+        .course-details.open { max-height: 800px; padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen sm:p-4">
+
+    <!-- Tarjeta Principal -->
+    <div class="w-full sm:max-w-sm mx-auto bg-white rounded-none sm:rounded-3xl overflow-hidden relative shadow-2xl">
+        <!-- Botón Instalar (Superior Izquierda) -->
+        <button type="button" id="installButton" aria-label="Instalar Aplicación" class="absolute top-4 left-4 z-20 w-12 h-12 bg-black/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-black/30 transition">
+            <i class="fas fa-mobile-screen-button text-2xl"></i>
+        </button>
+
+        <!-- Botón Llamar Telefónica (Superior Derecha) -->
+        <a href="tel:+573128513736" aria-label="Llamar por teléfono" class="absolute top-4 right-4 z-20 w-12 h-12 bg-black/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-black/30 transition">
+            <i class="fas fa-phone-alt text-2xl"></i>
+        </a>
+
+        <!-- Encabezado con Fotografía y Nombre -->
+        <div class="relative text-center pb-8 bg-white">
+            <div class="absolute top-0 left-0 w-full h-[320px]">
+                <img src="https://i.postimg.cc/RCdc3ktx/Whats-App-Image-2026-08-29-at-8-40-43-AM.jpg" alt="Jose Alfredo Latorre" class="w-full h-full object-cover object-top">
+                <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-white to-transparent"></div>
+            </div>
+            <div class="relative z-10 pt-[280px]">
+                <h1 class="font-playfair text-3xl tracking-widest uppercase name-color mt-2 leading-tight">
+                    <span class="block font-light">Jose Alfredo</span> 
+                    <span class="block font-bold">Latorre</span>
+                </h1>
+                <p class="text-sm tracking-[0.2em] text-[#0B0B42] mt-2 font-medium">Doctor en Gestión Educativa</p>
+                <h2 class="text-2xl font-light text-[#0B0B42] mt-8">¡Bienvenida(o)!</h2>
+            </div>
+        </div>
+
+        <!-- Botones de Acción Principales -->
+        <div class="p-6 pt-4 space-y-5 bg-white rounded-b-3xl">
+            <!-- 1. WhatsApp -->
+            <a href="https://wa.me/573128513736" target="_blank" rel="noopener noreferrer" class="relative flex items-center h-14 rounded-full blue-gradient button-3d group cursor-pointer">
+                <div class="absolute left-0 w-16 h-16 rounded-full flex items-center justify-center icon-bg">
+                    <i class="fab fa-whatsapp text-4xl icon-color"></i>
+                </div>
+                <span class="w-full pl-16 text-center text-white font-medium uppercase tracking-wider">WhatsApp</span>
+            </a>
+
+            <!-- 2. Horario -->
+            <button type="button" id="scheduleButton" class="w-full relative flex items-center h-14 rounded-full blue-gradient button-3d group cursor-pointer text-left">
+                <div class="absolute left-0 w-16 h-16 rounded-full flex items-center justify-center icon-bg">
+                    <i class="fas fa-clock text-3xl icon-color"></i>
+                </div>
+                <span class="w-full pl-12 text-center text-white font-medium uppercase tracking-wider">Horario</span>
+            </button>
+
+            <!-- 3. Cursos -->
+            <button type="button" id="coursesButton" class="w-full relative flex items-center h-14 rounded-full blue-gradient button-3d group cursor-pointer text-left">
+                <div class="absolute left-0 w-16 h-16 rounded-full flex items-center justify-center icon-bg">
+                    <i class="fas fa-graduation-cap text-3xl icon-color"></i>
+                </div>
+                <span class="w-full pl-12 text-center text-white font-medium uppercase tracking-wider">Cursos</span>
+            </button>
+
+            <!-- 4. Procedimientos -->
+            <button type="button" id="proceduresButton" class="w-full relative flex items-center h-14 rounded-full blue-gradient button-3d group cursor-pointer text-left">
+                <div class="absolute left-0 w-16 h-16 rounded-full flex items-center justify-center icon-bg">
+                    <i class="fas fa-fill-drip text-3xl icon-color -rotate-45"></i>
+                </div>
+                <span class="w-full pl-12 text-center text-white font-medium uppercase tracking-wider">Procedimientos</span>
+            </button>
+
+            <!-- 5. Compartir QR -->
+            <button type="button" id="qrButton" class="w-full relative flex items-center h-14 rounded-full blue-gradient button-3d group cursor-pointer text-left">
+                <div class="absolute left-0 w-16 h-16 rounded-full flex items-center justify-center icon-bg">
+                    <i class="fas fa-qrcode text-3xl icon-color"></i>
+                </div>
+                <span class="w-full pl-12 text-center text-white font-medium uppercase tracking-wider">Compartir QR</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 1: HORARIO -->
+    <div id="schedulePopup" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden transition-opacity duration-300">
+        <div class="bg-[#FFFBF5] rounded-2xl p-6 shadow-2xl relative max-w-sm w-full border border-amber-100">
+            <button type="button" id="closeSchedulePopup" class="absolute top-2 right-3 text-[#0B0B42] hover:text-red-600 text-3xl font-bold transition">&times;</button>
+            <h3 class="text-2xl font-medium mb-4 font-playfair text-[#0B0B42] text-center">Nuestro Horario</h3>
+            <div class="space-y-3 text-sm text-gray-800">
+                <div class="flex justify-between border-b border-gray-200 pb-2">
+                    <span class="font-medium">Lunes a Viernes</span> 
+                    <span class="font-semibold text-[#0B0B42]">8:00 AM - 7:00 PM</span>
+                </div>
+                <div class="flex justify-between border-b border-gray-200 pb-2">
+                    <span class="font-medium">Sábados</span> 
+                    <span class="font-semibold text-[#0B0B42]">8:00 AM - 2:00 PM</span>
+                </div>
+                <div class="flex justify-between text-gray-500">
+                    <span>Domingos y Festivos</span> 
+                    <span>Cerrado</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: COMPARTIR QR -->
+    <div id="qrPopup" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden transition-opacity duration-300">
+        <div class="bg-[#FFFBF5] rounded-2xl p-8 text-center shadow-2xl relative max-w-xs w-full border border-amber-100">
+            <button type="button" id="closeQrPopup" class="absolute top-2 right-3 text-[#0B0B42] hover:text-red-600 text-3xl font-bold transition">&times;</button>
+            <h3 class="text-xl font-medium mb-4 font-playfair text-[#0B0B42]">Escanea para Compartir</h3>
+            <div class="p-2 bg-white rounded-xl shadow-inner border">
+                <img src="https://i.postimg.cc/MpqfXCLR/qr-tarjeta.png" alt="Código QR de la Tarjeta" class="w-full h-auto rounded-lg">
+            </div>
+            <p class="text-xs text-gray-500 mt-4">Apunta con la cámara de tu móvil para guardar el contacto.</p>
+        </div>
+    </div>
+
+    <!-- MODAL 3: PROCEDIMIENTOS -->
+    <div id="proceduresPopup" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden transition-opacity duration-300">
+        <div class="bg-[#FFFBF5] rounded-2xl p-6 shadow-2xl relative max-w-sm w-full border border-amber-100">
+            <button type="button" id="closeProceduresPopup" class="absolute top-2 right-3 text-[#0B0B42] hover:text-red-600 text-3xl font-bold transition">&times;</button>
+            <h3 class="text-2xl font-medium mb-4 font-playfair text-[#0B0B42] text-center">Procedimientos</h3>
+            <div class="space-y-3 text-sm text-gray-700">
+                <div class="p-3 bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <h4 class="font-bold text-[#0B0B42] mb-1"><i class="fas fa-file-signature mr-2 text-indigo-900"></i>Asesoría Académica</h4>
+                    <p class="text-xs text-gray-600">Acompañamiento personalizado en gestión e innovación institucional.</p>
+                </div>
+                <div class="p-3 bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <h4 class="font-bold text-[#0B0B42] mb-1"><i class="fas fa-award mr-2 text-indigo-900"></i>Certificación Directiva</h4>
+                    <p class="text-xs text-gray-600">Trámites y convalidaciones para programas de formación avanzada.</p>
+                </div>
+                <div class="p-3 bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <h4 class="font-bold text-[#0B0B42] mb-1"><i class="fas fa-handshake mr-2 text-indigo-900"></i>Consultoría Ejecutiva</h4>
+                    <p class="text-xs text-gray-600">Evaluación de calidad y diseño curricular especializado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: CURSOS -->
+    <div id="coursesPopup" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden transition-opacity duration-300">
+        <div class="bg-[#FFFBF5] rounded-2xl p-6 shadow-2xl relative max-w-sm w-full h-[80vh] flex flex-col border border-amber-100">
+            <button type="button" id="closeCoursesPopup" class="absolute top-2 right-3 text-[#0B0B42] hover:text-red-600 text-3xl font-bold transition z-10">&times;</button>
+            <h3 class="text-2xl font-medium mb-4 font-playfair text-[#0B0B42] text-center">Cursos Disponibles</h3>
+            
+            <div class="space-y-4 overflow-y-auto pr-1 flex-1">
+                <!-- Curso 1 -->
+                <div class="border border-[#0B0B42]/30 bg-white rounded-xl p-4 shadow-sm">
+                    <h4 class="font-bold text-[#0B0B42] text-base leading-snug">Inteligencia Artificial Generativa</h4>
+                    <p class="text-xs text-gray-500 mt-1 mb-2">Aplicaciones prácticas en la gestión educativa y docencia.</p>
+                    <button type="button" class="course-info-toggle text-xs text-[#0B0B42] font-bold flex items-center gap-1 hover:underline focus:outline-none">
+                        <span>MÁS INFO</span> <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="course-details text-xs text-gray-600 space-y-1.5 border-t border-dashed mt-2">
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Introducción a la IA Generativa</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Uso de modelos de lenguaje avanzados</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Ingeniería de prompts profesional</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Generación de texto, imágenes, audio y video</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Automatización de contenidos educativos</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Creación de asistentes virtuales y chatbots</p>
+                    </div>
+                </div>
+
+                <!-- Curso 2 -->
+                <div class="border border-[#0B0B42]/30 bg-white rounded-xl p-4 shadow-sm">
+                    <h4 class="font-bold text-[#0B0B42] text-base leading-snug">Procesamiento de Lenguaje Natural</h4>
+                    <p class="text-xs text-gray-500 mt-1 mb-2">Análisis de datos conversacionales y textuales.</p>
+                    <button type="button" class="course-info-toggle text-xs text-[#0B0B42] font-bold flex items-center gap-1 hover:underline focus:outline-none">
+                        <span>MÁS INFO</span> <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="course-details text-xs text-gray-600 space-y-1.5 border-t border-dashed mt-2">
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Fundamentos del PLN</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Análisis de sentimientos en comunidades</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Clasificación automatizada de textos</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Resumen automático de documentos</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Traducción automática contextual</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-check text-green-600"></i> Sistemas conversacionales inteligentes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: INSTALACIÓN EN DISPOSITIVO -->
+    <div id="installPopup" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden transition-opacity duration-300">
+        <div class="bg-[#FFFBF5] rounded-2xl p-6 shadow-2xl relative max-w-sm w-full border border-amber-100">
+            <button type="button" id="closeInstallPopup" class="absolute top-2 right-3 text-[#0B0B42] hover:text-red-600 text-3xl font-bold transition">&times;</button>
+            <h3 class="text-xl font-medium text-center text-[#0B0B42] mb-4 font-playfair">Instalar en Dispositivo</h3>
+            <div class="flex border-b border-gray-300 mb-4">
+                <button type="button" id="iosTab" class="flex-1 p-2 text-center text-sm font-medium install-tab-active focus:outline-none">iOS (iPhone)</button>
+                <button type="button" id="androidTab" class="flex-1 p-2 text-center text-sm font-medium text-gray-500 focus:outline-none">Android</button>
+            </div>
+            <div id="iosInstructions" class="text-sm text-gray-700 space-y-2">
+                <p class="flex items-center gap-2"><i class="fas fa-share-from-square text-lg text-blue-600"></i> 1. Toca el icono de <strong>Compartir</strong> en la barra inferior del navegador.</p>
+                <p class="flex items-center gap-2"><i class="far fa-plus-square text-lg text-blue-600"></i> 2. Selecciona la opción <strong>"Añadir a pantalla de inicio"</strong>.</p>
+            </div>
+            <div id="androidInstructions" class="hidden text-sm text-gray-700 space-y-2">
+                <p class="flex items-center gap-2"><i class="fas fa-ellipsis-vertical text-lg text-gray-800"></i> 1. Toca el menú de <strong>tres puntos</strong> arriba a la derecha.</p>
+                <p class="flex items-center gap-2"><i class="fas fa-mobile-retro text-lg text-gray-800"></i> 2. Elige <strong>"Añadir a pantalla de inicio"</strong> o <strong>"Instalar aplicación"</strong>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Interactividad Completa -->
+    <script>
+        // Funciones auxiliares para abrir y cerrar modales
+        const openPopup = (id) => {
+            const popup = document.getElementById(id);
+            if (popup) {
+                popup.classList.remove('hidden');
+            }
+        };
+
+        const closePopup = (id) => {
+            const popup = document.getElementById(id);
+            if (popup) {
+                popup.classList.add('hidden');
+            }
+        };
+
+        // Asignación de Eventos a Botones del Menú
+        document.getElementById('scheduleButton').addEventListener('click', (e) => {
+            e.preventDefault();
+            openPopup('schedulePopup');
+        });
+        document.getElementById('closeSchedulePopup').addEventListener('click', () => closePopup('schedulePopup'));
+
+        document.getElementById('qrButton').addEventListener('click', (e) => {
+            e.preventDefault();
+            openPopup('qrPopup');
+        });
+        document.getElementById('closeQrPopup').addEventListener('click', () => closePopup('qrPopup'));
+
+        document.getElementById('coursesButton').addEventListener('click', (e) => {
+            e.preventDefault();
+            openPopup('coursesPopup');
+        });
+        document.getElementById('closeCoursesPopup').addEventListener('click', () => closePopup('coursesPopup'));
+
+        document.getElementById('proceduresButton').addEventListener('click', (e) => {
+            e.preventDefault();
+            openPopup('proceduresPopup');
+        });
+        document.getElementById('closeProceduresPopup').addEventListener('click', () => closePopup('proceduresPopup'));
+
+        document.getElementById('installButton').addEventListener('click', (e) => {
+            e.preventDefault();
+            openPopup('installPopup');
+        });
+        document.getElementById('closeInstallPopup').addEventListener('click', () => closePopup('installPopup'));
+
+        // Cierre de ventanas emergentes haciendo clic fuera del contenido del modal
+        const popups = ['schedulePopup', 'qrPopup', 'coursesPopup', 'proceduresPopup', 'installPopup'];
+        popups.forEach(popupId => {
+            const popupElement = document.getElementById(popupId);
+            if (popupElement) {
+                popupElement.addEventListener('click', (e) => {
+                    if (e.target === popupElement) {
+                        closePopup(popupId);
+                    }
+                });
+            }
+        });
+
+        // Toggle Desplegable en el Modal de Cursos ("MÁS INFO")
+        document.querySelectorAll('.course-info-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const details = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                
+                details.classList.toggle('open');
+                if (icon) {
+                    icon.classList.toggle('rotate-180');
+                }
+            });
+        });
+
+        // Control de Pestañas (iOS / Android) en el Modal de Instalación
+        const iosTab = document.getElementById('iosTab');
+        const androidTab = document.getElementById('androidTab');
+        const iosInstructions = document.getElementById('iosInstructions');
+        const androidInstructions = document.getElementById('androidInstructions');
+
+        iosTab.addEventListener('click', () => {
+            iosInstructions.classList.remove('hidden');
+            androidInstructions.classList.add('hidden');
+            
+            iosTab.classList.add('install-tab-active', 'text-[#0B0B42]');
+            iosTab.classList.remove('text-gray-500');
+            
+            androidTab.classList.remove('install-tab-active', 'text-[#0B0B42]');
+            androidTab.classList.add('text-gray-500');
+        });
+
+        androidTab.addEventListener('click', () => {
+            androidInstructions.classList.remove('hidden');
+            iosInstructions.classList.add('hidden');
+            
+            androidTab.classList.add('install-tab-active', 'text-[#0B0B42]');
+            androidTab.classList.remove('text-gray-500');
+            
+            iosTab.classList.remove('install-tab-active', 'text-[#0B0B42]');
+            iosTab.classList.add('text-gray-500');
+        });
+    </script>
+</body>
+</html>
